@@ -12,13 +12,12 @@ export default function Home() {
             <div className="space-y-6 text-base leading-relaxed animate-fade-in-delay-1" style={{ color: 'var(--color-text)' }}>
               <p>
                 I am a high school student at William Fremd High School in Palatine, Illinois, graduating in May 2026.
-                I currently serve as the AI/ML Club President and organized Illinois's largest high school hackathon with 120+ attendees and $11K in sponsorship.
               </p>
 
               <p>
                 I work as a computational biology research intern at{' '}
                 <a
-                  href="https://www.cmu.edu"
+                  href="https://murphylab.cbd.cmu.edu/"
                   className="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -26,9 +25,9 @@ export default function Home() {
                   Carnegie Mellon University
                 </a>
                 , where I engineer spatial point-process augmentation models and build memory-efficient generative AI pipelines.
-                Previously, I worked as a computational neuroscience researcher at{' '}
+                I also currently work as a computational neuroscience researcher at{' '}
                 <a
-                  href="https://www.brown.edu"
+                  href="https://www.southcoast.org/"
                   className="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
