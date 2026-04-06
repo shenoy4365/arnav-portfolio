@@ -298,7 +298,7 @@ export default function Home() {
     });
 
   return (
-    <div className="min-h-screen bg-[#f2f0eb] dark:bg-[#1e1e1e] transition-colors duration-200 flex flex-col">
+    <div className="min-h-screen bg-[#f2f0eb] dark:bg-[#1e1e1e] transition-colors duration-200 flex flex-col animate-fade-in-up">
         {/* Nav */}
         <nav className="max-w-5xl w-full mx-auto px-14 pt-12">
           <div className="flex items-center justify-between pb-4">
@@ -374,7 +374,7 @@ export default function Home() {
                 </div>
 
                 {/* Right col */}
-                <div className="flex-1 space-y-6 text-[19px] leading-[1.9] text-gray-600 dark:text-gray-400">
+                <div className="flex-1 space-y-6 text-[17px] leading-[1.9] text-gray-600 dark:text-gray-400">
                   <p>
                     Hi! I&apos;m a student at{" "}
                     <a

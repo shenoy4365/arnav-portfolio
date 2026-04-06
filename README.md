@@ -11,12 +11,12 @@ A clean, minimal personal portfolio website built with Next.js 15, TypeScript, a
 
 ## Features
 
-- 🎨 Clean, minimal design
-- 📱 Fully responsive layout
-- ⚡ Optimized performance with Next.js
-- 🎭 Subtle fade-in animations
-- ♿ Semantic HTML and accessibility features
-- 🔍 SEO optimized with OpenGraph tags
+- Clean, minimal design
+- Fully responsive layout
+- Optimized performance with Next.js
+- Subtle fade-in animations
+- Semantic HTML and accessibility features
+- SEO optimized with OpenGraph tags
 
 ## Getting Started
 
@@ -35,10 +35,6 @@ npm start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the site.
-
-## Design Credits
-
-Portfolio design heavily inspired by [Pranav Ramesh](https://pranavramesh.com/)'s clean, centered dark layout. Built from scratch in Next.js with custom implementation.
 
 ## License
 
