@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
 
-type Tab = "about" | "projects";
+type Tab = "about" | "work" | "projects";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<Tab>("about");
@@ -12,13 +12,13 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#f9f9f7] flex flex-col">
       {/* Nav */}
-      <nav className="max-w-3xl w-full mx-auto px-10 pt-10">
-        <div className="flex justify-end gap-8 pb-3">
-          {(["about", "projects"] as Tab[]).map((tab) => (
+      <nav className="max-w-5xl w-full mx-auto px-14 pt-12">
+        <div className="flex justify-end gap-10 pb-4">
+          {(["about", "work", "projects"] as Tab[]).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`text-sm capitalize tracking-wide transition-all duration-150 ${
+              className={`text-base capitalize tracking-wide transition-all duration-150 ${
                 activeTab === tab
                   ? "text-gray-900 font-semibold border-b-2 border-gray-900 pb-1"
                   : "text-gray-400 hover:text-gray-600 pb-1"
@@ -32,22 +32,22 @@ export default function Home() {
       </nav>
 
       {/* Main content */}
-      <main className="max-w-3xl w-full mx-auto px-10 pt-14 pb-6 flex-1">
+      <main className="max-w-5xl w-full mx-auto px-14 pt-20 pb-10 flex-1">
         {activeTab === "about" && (
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight mb-10">
-              Arnav Shenoy
+            <h1 className="text-4xl font-bold text-gray-900 tracking-tight mb-14">
+              Hi, I'm Arnav Shenoy
             </h1>
 
-            <div className="flex gap-14">
+            <div className="flex gap-20">
               {/* Left col */}
-              <div className="flex-shrink-0 flex flex-col items-start gap-5">
+              <div className="flex-shrink-0 flex flex-col items-center gap-6">
                 <img
                   src="/images/profile.jpg"
                   alt="Arnav Shenoy"
-                  className="w-44 h-44 rounded-full object-cover"
+                  className="w-56 h-72 rounded-xl object-cover"
                 />
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-5">
                   <a
                     href="https://github.com/shenoy4365"
                     target="_blank"
@@ -55,7 +55,7 @@ export default function Home() {
                     aria-label="GitHub"
                     className="text-gray-400 hover:text-gray-800 transition-colors"
                   >
-                    <FaGithub size={21} />
+                    <FaGithub size={26} />
                   </a>
                   <a
                     href="https://linkedin.com/in/arnav-shenoy"
@@ -64,28 +64,20 @@ export default function Home() {
                     aria-label="LinkedIn"
                     className="text-gray-400 hover:text-gray-800 transition-colors"
                   >
-                    <FaLinkedinIn size={21} />
+                    <FaLinkedinIn size={26} />
                   </a>
                   <a
                     href="mailto:arnav.shenoy@gmail.com"
                     aria-label="Email"
                     className="text-gray-400 hover:text-gray-800 transition-colors"
                   >
-                    <MdOutlineEmail size={23} />
+                    <MdOutlineEmail size={28} />
                   </a>
                 </div>
-                <a
-                  href="/AS_Resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-gray-400 hover:text-gray-700 underline underline-offset-2 transition-colors"
-                >
-                  resume
-                </a>
               </div>
 
               {/* Right col */}
-              <div className="flex-1 space-y-5 text-[14.5px] leading-[1.85] text-gray-600">
+              <div className="flex-1 space-y-6 text-[16px] leading-[1.9] text-gray-600">
                 <p>
                   Hi! I&apos;m a student at{" "}
                   <a
@@ -145,12 +137,21 @@ export default function Home() {
           </div>
         )}
 
+        {activeTab === "work" && (
+          <div>
+            <h2 className="text-4xl font-bold text-gray-900 tracking-tight mb-14">
+              Work
+            </h2>
+            <p className="text-[16px] text-gray-400">Coming soon.</p>
+          </div>
+        )}
+
         {activeTab === "projects" && (
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 tracking-tight mb-10">
+            <h2 className="text-4xl font-bold text-gray-900 tracking-tight mb-14">
               Projects
             </h2>
-            <p className="text-[14.5px] text-gray-400">Coming soon.</p>
+            <p className="text-[16px] text-gray-400">Coming soon.</p>
           </div>
         )}
       </main>
