@@ -17,7 +17,7 @@ html.dark ::selection {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;

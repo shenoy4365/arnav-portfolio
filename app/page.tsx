@@ -266,12 +266,17 @@ function WorkRow({ entry, open, onToggle }: {
 export default function Home() {
   const [activeTab, setActiveTab] = useState<Tab>("about");
   const [isDark, setIsDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
+  // Read theme from DOM after hydration (inline script already set html.dark)
   useEffect(() => {
     setIsDark(document.documentElement.classList.contains("dark"));
+    setMounted(true);
   }, []);
 
+  // Persist theme changes (skip on first render to avoid clearing what the script set)
   useEffect(() => {
+    if (!mounted) return;
     if (isDark) {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
@@ -279,7 +284,7 @@ export default function Home() {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }
-  }, [isDark]);
+  }, [isDark, mounted]);
   const [openProjects, setOpenProjects] = useState<Set<number>>(new Set());
   const [openWork, setOpenWork] = useState<Set<number>>(new Set());
 
@@ -307,7 +312,7 @@ export default function Home() {
               aria-label="Toggle theme"
               className="text-gray-400 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-200 transition-colors"
             >
-              {isDark ? <Sun size={18} /> : <Moon size={18} />}
+              {mounted ? (isDark ? <Sun size={18} /> : <Moon size={18} />) : <Moon size={18} />}
             </button>
             <div className="flex gap-10">
               {(["about", "work", "projects"] as Tab[]).map((tab) => (
@@ -416,18 +421,11 @@ export default function Home() {
                     >
                       UCLA
                     </a>
-                    . I&apos;m broadly interested in machine learning,
-                    computational biology, and neuroscience.
+                    . 
                   </p>
                   <p>
-                    Feel free to reach out at{" "}
-                    <a
-                      href="mailto:arnav.shenoy@gmail.com"
-                      className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
-                    >
-                      arnav.shenoy@gmail.com
-                    </a>
-                    .
+                    I&apos;m interested in machine learning,
+                    computational biology, and neuroscience.
                   </p>
                 </div>
               </div>
@@ -438,7 +436,7 @@ export default function Home() {
           {activeTab === "work" && (
             <div>
               <h2 className="text-4xl font-normal text-gray-900 dark:text-gray-100 tracking-tight mb-10">
-                Work
+                Work Experience
               </h2>
               <div>
                 {workEntries.map((entry, i) => (
@@ -457,7 +455,7 @@ export default function Home() {
           {activeTab === "projects" && (
             <div>
               <h2 className="text-4xl font-normal text-gray-900 dark:text-gray-100 tracking-tight mb-10">
-                Projects
+                Coding Projects
               </h2>
               <div>
                 {projects.map((project, i) => (
