@@ -1,104 +1,159 @@
+"use client";
+
+import { useState } from "react";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { MdOutlineEmail } from "react-icons/md";
+
+type Tab = "about" | "projects";
+
 export default function Home() {
+  const [activeTab, setActiveTab] = useState<Tab>("about");
+
   return (
-    <main className="min-h-screen flex items-center justify-center px-8 py-16 md:px-16 lg:px-24">
-      <div className="max-w-6xl w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 lg:gap-24 items-start">
-          {/* Content - Left Side */}
-          <div className="space-y-8 pt-8">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal leading-tight animate-fade-in">
+    <div className="min-h-screen bg-[#f9f9f7] flex flex-col">
+      {/* Nav */}
+      <nav className="max-w-3xl w-full mx-auto px-10 pt-10">
+        <div className="flex justify-end gap-8 pb-3">
+          {(["about", "projects"] as Tab[]).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`text-sm capitalize tracking-wide transition-all duration-150 ${
+                activeTab === tab
+                  ? "text-gray-900 font-semibold border-b-2 border-gray-900 pb-1"
+                  : "text-gray-400 hover:text-gray-600 pb-1"
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+        <hr className="border-gray-200" />
+      </nav>
+
+      {/* Main content */}
+      <main className="max-w-3xl w-full mx-auto px-10 pt-14 pb-6 flex-1">
+        {activeTab === "about" && (
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 tracking-tight mb-10">
               Arnav Shenoy
             </h1>
 
-            <div className="space-y-6 text-base leading-relaxed animate-fade-in-delay-1" style={{ color: 'var(--color-text)' }}>
-              <p>
-                I am a high school student at William Fremd High School in Palatine, Illinois, graduating in May 2026.
-              </p>
-
-              <p>
-                I work as a computational biology research intern at{' '}
+            <div className="flex gap-14">
+              {/* Left col */}
+              <div className="flex-shrink-0 flex flex-col items-start gap-5">
+                <img
+                  src="/images/profile.jpg"
+                  alt="Arnav Shenoy"
+                  className="w-44 h-44 rounded-full object-cover"
+                />
+                <div className="flex items-center gap-4">
+                  <a
+                    href="https://github.com/shenoy4365"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                    className="text-gray-400 hover:text-gray-800 transition-colors"
+                  >
+                    <FaGithub size={21} />
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/arnav-shenoy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    className="text-gray-400 hover:text-gray-800 transition-colors"
+                  >
+                    <FaLinkedinIn size={21} />
+                  </a>
+                  <a
+                    href="mailto:arnav.shenoy@gmail.com"
+                    aria-label="Email"
+                    className="text-gray-400 hover:text-gray-800 transition-colors"
+                  >
+                    <MdOutlineEmail size={23} />
+                  </a>
+                </div>
                 <a
-                  href="https://murphylab.cbd.cmu.edu/"
-                  className="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
+                  href="/AS_Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="text-xs text-gray-400 hover:text-gray-700 underline underline-offset-2 transition-colors"
                 >
-                  Carnegie Mellon University
+                  resume
                 </a>
-                , where I engineer spatial point-process augmentation models and build memory-efficient generative AI pipelines.
-                I also currently work as a computational neuroscience researcher at{' '}
-                <a
-                  href="https://www.southcoast.org/"
-                  className="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Southcoast Health (Brown-Affiliated)
-                </a>
-                {' '}and{' '}
-                <a
-                  href="https://www.ucla.edu"
-                  className="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  UCLA School of Medicine
-                </a>
-                .
-              </p>
+              </div>
 
-              <p>
-                My research interests include machine learning, computational biology, neuroscience, and computer vision.
-                I was awarded the 2025 Congressional App Challenge Winner and qualified twice for the American Invitational Mathematics Examination (AIME).
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-x-3 gap-y-2 text-base animate-fade-in-delay-2">
-              <a
-                href="mailto:arnav.shenoy@gmail.com"
-                className="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
-              >
-                Email
-              </a>
-              <span className="text-[var(--color-text-muted)]">/</span>
-              <a
-                href="/AS_Resume.pdf"
-                className="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Resume
-              </a>
-              <span className="text-[var(--color-text-muted)]">/</span>
-              <a
-                href="https://github.com/shenoy4365"
-                className="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
-              </a>
-              <span className="text-[var(--color-text-muted)]">/</span>
-              <a
-                href="https://linkedin.com/in/arnav-shenoy"
-                className="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                LinkedIn
-              </a>
-            </div>
-          </div>
-
-          {/* Profile Image - Right Side */}
-          <div className="flex justify-center md:justify-end">
-            <div className="w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden animate-fade-in-image hover:scale-105 transition-transform duration-300">
-              <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                <span className="text-6xl text-gray-400">AS</span>
+              {/* Right col */}
+              <div className="flex-1 space-y-5 text-[14.5px] leading-[1.85] text-gray-600">
+                <p>
+                  Hi! I&apos;m a student at{" "}
+                  <a
+                    href="https://fremd.d211.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-900 underline underline-offset-2 decoration-gray-300 hover:decoration-gray-600 transition-colors"
+                  >
+                    William Fremd High School
+                  </a>{" "}
+                  studying computer science and statistics. I&apos;m a
+                  computational biology research intern at{" "}
+                  <a
+                    href="https://www.cmu.edu/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-900 underline underline-offset-2 decoration-gray-300 hover:decoration-gray-600 transition-colors"
+                  >
+                    Carnegie Mellon University
+                  </a>
+                  , where I work on machine learning for healthcare.
+                </p>
+                <p>
+                  Previously, I&apos;ve conducted research at{" "}
+                  <a
+                    href="https://www.brown.edu/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-900 underline underline-offset-2 decoration-gray-300 hover:decoration-gray-600 transition-colors"
+                  >
+                    Brown University
+                  </a>{" "}
+                  and{" "}
+                  <a
+                    href="https://www.ucla.edu/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-900 underline underline-offset-2 decoration-gray-300 hover:decoration-gray-600 transition-colors"
+                  >
+                    UCLA
+                  </a>
+                  . I&apos;m broadly interested in machine learning,
+                  computational biology, and neuroscience.
+                </p>
+                <p>
+                  Feel free to reach out at{" "}
+                  <a
+                    href="mailto:arnav.shenoy@gmail.com"
+                    className="text-gray-900 underline underline-offset-2 decoration-gray-300 hover:decoration-gray-600 transition-colors"
+                  >
+                    arnav.shenoy@gmail.com
+                  </a>
+                  .
+                </p>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </main>
+        )}
+
+        {activeTab === "projects" && (
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900 tracking-tight mb-10">
+              Projects
+            </h2>
+            <p className="text-[14.5px] text-gray-400">Coming soon.</p>
+          </div>
+        )}
+      </main>
+    </div>
   );
 }

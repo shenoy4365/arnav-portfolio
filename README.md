@@ -36,6 +36,10 @@ npm start
 
 Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-## Design Inspiration
+## Design Credits
 
-Portfolio design inspired by [John Barron, Google DeepMind Scientist](https://jonbarron.info/) and the Jekyll Community 
+Portfolio design heavily inspired by [Pranav Ramesh](https://pranavramesh.com/)'s clean, centered dark layout. Built from scratch in Next.js with custom implementation.
+
+## License
+
+MIT License - feel free to use this as a template for your own portfolio!
