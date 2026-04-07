@@ -15,7 +15,7 @@ This portfolio is built around a **clean, academic minimalism** aesthetic that p
 - **Consistent Typography** — Inter at varying weights; headings match body font for a cohesive, unfussy feel
 - **Purposeful Motion** — A single fade-in-up entrance animation; nothing animated for its own sake
 - **Subtle Interactions** — Accordion rows, hover underlines, and a theme toggle that stays out of the way
-- **Dark Mode Done Right** — Persisted via `localStorage`, applied before paint via an inline script, no flash
+- **Light/Dark Mode Toggle** — Persisted via `localStorage`, applied before paint via an inline script, no flash
 
 ## 🏗️ File Structure
 

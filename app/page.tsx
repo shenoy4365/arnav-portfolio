@@ -88,7 +88,7 @@ const workEntries: WorkEntry[] = [
     tags: ["Python", "PyTorch", "Bioinformatics"],
     iconBg: "bg-red-100 dark:bg-red-950",
     iconLabel: "CMU",
-    iconSrc: "/icons/cmu.svg",
+    iconSrc: "/icons/cmu-website-icon.png",
   },
   {
     role: "Computational Neuroscience Researcher",
@@ -102,7 +102,7 @@ const workEntries: WorkEntry[] = [
     tags: ["Python", "Machine Learning"],
     iconBg: "bg-amber-100 dark:bg-amber-950",
     iconLabel: "SCH",
-    iconSrc: "/icons/southcoast.svg",
+    iconSrc: "/icons/southcoast-website-icon.png",
   },
   {
     role: "Independent Neuroscience Researcher",
@@ -115,7 +115,7 @@ const workEntries: WorkEntry[] = [
     tags: ["Python", "Neuroscience"],
     iconBg: "bg-sky-100 dark:bg-sky-950",
     iconLabel: "UCLA",
-    iconSrc: "/icons/ucla.svg",
+    iconSrc: "/icons/ucla-website-icon.png",
   },
   {
     role: "Machine Learning Research Intern",
@@ -128,7 +128,7 @@ const workEntries: WorkEntry[] = [
     tags: ["Python", "Neuroscience"],
     iconBg: "bg-purple-100 dark:bg-purple-950",
     iconLabel: "DAI",
-    iconSrc: "/icons/dhisha.svg",
+    iconSrc: "/icons/dhisha-website-icon.png",
   },
 ];
 
@@ -368,13 +368,13 @@ export default function Home() {
             </button>
           </div>
 
-          {/* Center: tabs — desktop only */}
-          <div className="hidden sm:flex gap-10">
+          {/* Right: tabs (desktop) | theme toggle (mobile) */}
+          <div className="flex items-center gap-10">
             {(["about", "work", "projects"] as Tab[]).map((tab) => (
               <button
                 key={tab}
                 onClick={() => handleTabChange(tab)}
-                className={`text-lg capitalize tracking-wide transition-all duration-150 ${
+                className={`hidden sm:block text-lg capitalize tracking-wide transition-all duration-150 ${
                   activeTab === tab
                     ? "text-gray-900 dark:text-gray-100 font-semibold border-b-2 border-gray-900 dark:border-gray-100 pb-1"
                     : "text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-400 pb-1"
@@ -383,19 +383,14 @@ export default function Home() {
                 {tab}
               </button>
             ))}
+            <button
+              onClick={() => setIsDark(!isDark)}
+              aria-label="Toggle theme"
+              className="sm:hidden text-gray-400 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-200 transition-colors"
+            >
+              {mounted ? (isDark ? <Sun size={18} /> : <Moon size={18} />) : <Moon size={18} />}
+            </button>
           </div>
-
-          {/* Right: theme toggle on mobile, empty on desktop (theme is left) */}
-          <button
-            onClick={() => setIsDark(!isDark)}
-            aria-label="Toggle theme"
-            className="sm:hidden text-gray-400 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-200 transition-colors"
-          >
-            {mounted ? (isDark ? <Sun size={18} /> : <Moon size={18} />) : <Moon size={18} />}
-          </button>
-
-          {/* Spacer on desktop to keep tabs centered */}
-          <div className="hidden sm:block w-[18px]" />
         </div>
 
         <hr className="border-gray-200 dark:border-gray-800" />
@@ -425,97 +420,93 @@ export default function Home() {
         {/* About */}
         {activeTab === "about" && (
           <div>
-            <h1 className="text-4xl sm:text-5xl font-normal text-gray-900 dark:text-gray-100 tracking-tight mb-10 sm:mb-14">
+            <h1 className="text-4xl sm:text-5xl font-normal text-gray-900 dark:text-gray-100 tracking-tight mb-5 sm:mb-7">
               Hi, I&apos;m Arnav Shenoy
             </h1>
-            <div className="flex flex-col sm:flex-row gap-10 sm:gap-20">
-              {/* Left col */}
-              <div className="flex flex-col items-center gap-6 sm:flex-shrink-0">
-                {/*
-                <img
-                  src="/images/profile.jpg"
-                  alt="Arnav Shenoy"
-                  className="w-44 sm:w-56 h-auto rounded-xl object-cover"
-                />
-                */}
-                <div className="flex items-center gap-5">
-                  <a
-                    href="https://github.com/shenoy4365"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="GitHub"
-                    className="text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
-                  >
-                    <FaGithub size={26} />
-                  </a>
-                  <a
-                    href="https://linkedin.com/in/arnav-shenoy"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="LinkedIn"
-                    className="text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
-                  >
-                    <FaLinkedinIn size={26} />
-                  </a>
-                  <a
-                    href="mailto:arnav.shenoy@gmail.com"
-                    aria-label="Email"
-                    className="text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
-                  >
-                    <MdOutlineEmail size={28} />
-                  </a>
-                </div>
-              </div>
+            {/*
+            <img
+              src="/images/profile.jpg"
+              alt="Arnav Shenoy"
+              className="w-44 sm:w-56 h-auto rounded-xl object-cover mb-8"
+            />
+            */}
 
-              {/* Right col */}
-              <div className="flex-1 space-y-6 text-[18px] leading-[1.9] text-gray-600 dark:text-gray-400">
-                <p>
-                  Hi! I&apos;m a student at{" "}
-                  <a
-                    href="https://fremd.d211.org/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
-                  >
-                    William Fremd High School
-                  </a>{" "}
-                  studying computer science and statistics. I&apos;m a
-                  computational biology research intern at{" "}
-                  <a
-                    href="https://www.cmu.edu/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
-                  >
-                    Carnegie Mellon University
-                  </a>
-                  , where I work on machine learning for healthcare.
-                </p>
-                <p>
-                  Previously, I&apos;ve conducted research at{" "}
-                  <a
-                    href="https://www.brown.edu/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
-                  >
-                    Brown University
-                  </a>{" "}
-                  and{" "}
-                  <a
-                    href="https://www.ucla.edu/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
-                  >
-                    UCLA
-                  </a>
-                  .
-                </p>
-                <p>
-                  I&apos;m interested in machine learning,
-                  computational biology, and neuroscience.
-                </p>
+            <div className="space-y-6 text-[18px] leading-[1.9] text-gray-600 dark:text-gray-400">
+              <p>
+                Hi! I&apos;m a student at{" "}
+                <a
+                  href="https://fremd.d211.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
+                >
+                  William Fremd High School
+                </a>{" "}
+                studying computer science and statistics. I&apos;m a
+                computational biology research intern at{" "}
+                <a
+                  href="https://www.cmu.edu/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
+                >
+                  Carnegie Mellon University
+                </a>
+                , where I work on machine learning for healthcare.
+              </p>
+              <p>
+                Previously, I&apos;ve conducted research at{" "}
+                <a
+                  href="https://www.brown.edu/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
+                >
+                  Brown University
+                </a>{" "}
+                and{" "}
+                <a
+                  href="https://www.ucla.edu/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
+                >
+                  UCLA
+                </a>
+                .
+              </p>
+              <p>
+                I&apos;m interested in machine learning,
+                computational biology, and neuroscience.
+              </p>
+
+              {/* Social icons */}
+              <div className="flex items-center gap-5 pt-2">
+                <a
+                  href="https://github.com/shenoy4365"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                  className="text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
+                >
+                  <FaGithub size={26} />
+                </a>
+                <a
+                  href="https://linkedin.com/in/arnav-shenoy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
+                >
+                  <FaLinkedinIn size={26} />
+                </a>
+                <a
+                  href="mailto:arnav.shenoy@gmail.com"
+                  aria-label="Email"
+                  className="text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
+                >
+                  <MdOutlineEmail size={28} />
+                </a>
               </div>
             </div>
           </div>
