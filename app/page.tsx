@@ -81,11 +81,9 @@ const workEntries: WorkEntry[] = [
     start: "Jan 2026",
     end: "Present",
     bullets: [
-      "Add bullet points about your research contributions here.",
-      "What methods did you develop or apply?",
-      "What was the impact or outcome?",
+      "Engineering spatial point-process augmentation models for colon tissue analysis."
     ],
-    tags: ["Python", "PyTorch", "Bioinformatics"],
+    tags: ["Python", "Generative AI", "PyTorch", "Bioinformatics"],
     iconBg: "bg-red-100 dark:bg-red-950",
     iconLabel: "CMU",
     iconSrc: "/icons/cmu-website-icon.png",
@@ -96,11 +94,11 @@ const workEntries: WorkEntry[] = [
     start: "Nov 2025",
     end: "Present",
     bullets: [
-      "Add bullet points about your research contributions here.",
-      "What did you work on and with whom?",
+      "Working with Brown University Professor to build a novel machine-learning and genetic survival model for glioblastoma patients; named an IJAS (ISEF-affiliated) Semifinalist",
+      // "What did you work on and with whom?",
     ],
-    tags: ["Python", "Machine Learning"],
-    iconBg: "bg-amber-100 dark:bg-amber-950",
+    tags: ["Python", "Machine Learning", "Survival Analysis", "Neuroscience"],
+    iconBg: "bg-green-100 dark:bg-green-950",
     iconLabel: "SCH",
     iconSrc: "/icons/southcoast-website-icon.png",
   },
@@ -110,9 +108,9 @@ const workEntries: WorkEntry[] = [
     start: "Nov 2025",
     end: "Present",
     bullets: [
-      "Add bullet points about your research contributions here.",
+      "Developing ODE models of tripartite synapse dynamics, quantifying glutamate excitability differences across GBM tumor grades",
     ],
-    tags: ["Python", "Neuroscience"],
+    tags: ["Python", "ODE Modeling", "Gene Expression", "Neuroscience"],
     iconBg: "bg-sky-100 dark:bg-sky-950",
     iconLabel: "UCLA",
     iconSrc: "/icons/ucla-website-icon.png",
@@ -123,9 +121,9 @@ const workEntries: WorkEntry[] = [
     start: "May 2025",
     end: "July 2025",
     bullets: [
-      "Add bullet points about your research contributions here.",
+      "Built a deep-learning model detecting retinal diseases (glaucoma, cataracts, diabetic retinopathy) with 95% accuracy across 10K+ images; won the 2025 Congressional App Challenge",
     ],
-    tags: ["Python", "Neuroscience"],
+    tags: ["Python", "Computer Vision", "Deep Learning", "Transfer Learning"],
     iconBg: "bg-purple-100 dark:bg-purple-950",
     iconLabel: "DAI",
     iconSrc: "/icons/dhisha-website-icon.png",
@@ -221,7 +219,8 @@ function WorkRow({ entry, open, onToggle }: {
           className={`h-12 w-12 flex-shrink-0 rounded-lg ${entry.iconBg} flex items-center justify-center overflow-hidden`}
         >
           {entry.iconSrc && !imgError ? (
-            <Image
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
               src={entry.iconSrc}
               alt={entry.company}
               width={40}
@@ -515,7 +514,7 @@ export default function Home() {
         {/* Work */}
         {activeTab === "work" && (
           <div>
-            <h2 className="text-4xl sm:text-5xl font-normal text-gray-900 dark:text-gray-100 tracking-tight mb-10">
+            <h2 className="text-4xl sm:text-5xl font-normal text-gray-900 dark:text-gray-100 tracking-tight mb-5">
               Work Experience
             </h2>
             <div>
@@ -534,7 +533,7 @@ export default function Home() {
         {/* Projects */}
         {activeTab === "projects" && (
           <div>
-            <h2 className="text-4xl sm:text-5xl font-normal text-gray-900 dark:text-gray-100 tracking-tight mb-10">
+            <h2 className="text-4xl sm:text-5xl font-normal text-gray-900 dark:text-gray-100 tracking-tight mb-5">
               Coding Projects
             </h2>
             <div>
