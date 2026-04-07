@@ -50,4 +50,4 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## 📧 Contact
 
-arnav [dot] shenoy [at] gmail [dot] com
+Reach out at: arnav [dot] shenoy [at] gmail [dot] com

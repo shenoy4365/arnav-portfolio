@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
-import { Sun, Moon, ChevronDown, ExternalLink } from "lucide-react";
+import { Sun, Moon, ChevronDown, ExternalLink, Menu, X } from "lucide-react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -27,6 +28,7 @@ type WorkEntry = {
   tags?: string[];
   iconBg: string;
   iconLabel: string;
+  iconSrc?: string;
 };
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -77,7 +79,7 @@ const workEntries: WorkEntry[] = [
   {
     role: "Computational Biology Research Intern",
     company: "Carnegie Mellon University",
-    start: "2024",
+    start: "Jan 2026",
     end: "Present",
     bullets: [
       "Add bullet points about your research contributions here.",
@@ -87,31 +89,47 @@ const workEntries: WorkEntry[] = [
     tags: ["Python", "PyTorch", "Bioinformatics"],
     iconBg: "bg-red-100 dark:bg-red-950",
     iconLabel: "CMU",
+    iconSrc: "/icons/cmu.svg",
   },
   {
-    role: "Research Intern",
-    company: "Brown University",
-    start: "2023",
-    end: "2024",
+    role: "Computational Neuroscience Researcher",
+    company: "Southcoast Health",
+    start: "Nov 2025",
+    end: "Present",
     bullets: [
       "Add bullet points about your research contributions here.",
       "What did you work on and with whom?",
     ],
     tags: ["Python", "Machine Learning"],
     iconBg: "bg-amber-100 dark:bg-amber-950",
-    iconLabel: "BU",
+    iconLabel: "SCH",
+    iconSrc: "/icons/southcoast.svg",
   },
   {
-    role: "Research Intern",
+    role: "Independent Neuroscience Researcher",
     company: "UCLA",
-    start: "2023",
-    end: "2023",
+    start: "Nov 2025",
+    end: "Present",
     bullets: [
       "Add bullet points about your research contributions here.",
     ],
     tags: ["Python", "Neuroscience"],
     iconBg: "bg-sky-100 dark:bg-sky-950",
     iconLabel: "UCLA",
+    iconSrc: "/icons/ucla.svg",
+  },
+  {
+    role: "Machine Learning Research Intern",
+    company: "Dhisha AI",
+    start: "May 2025",
+    end: "July 2025",
+    bullets: [
+      "Add bullet points about your research contributions here.",
+    ],
+    tags: ["Python", "Neuroscience"],
+    iconBg: "bg-purple-100 dark:bg-purple-950",
+    iconLabel: "DAI",
+    iconSrc: "/icons/dhisha.svg",
   },
 ];
 
@@ -134,7 +152,7 @@ function ProjectRow({ project, open, onToggle }: {
           className="flex flex-col w-full text-left"
         >
           <div className="flex items-baseline justify-between w-full gap-4">
-            <span className="text-gray-900 dark:text-gray-100 font-semibold text-[18px] hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            <span className="text-gray-900 dark:text-gray-100 font-semibold text-[19px] hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
               {project.href && project.href !== "#" ? (
                 <a
                   href={project.href}
@@ -155,7 +173,7 @@ function ProjectRow({ project, open, onToggle }: {
               className={`text-gray-400 flex-shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
             />
           </div>
-          <span className="text-gray-500 dark:text-gray-400 text-[16px] mt-0.5">
+          <span className="text-gray-500 dark:text-gray-400 text-[17px] mt-0.5">
             {project.caption}
           </span>
         </button>
@@ -166,14 +184,14 @@ function ProjectRow({ project, open, onToggle }: {
         className={`grid transition-all duration-300 ease-in-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
       >
         <div className="overflow-hidden">
-          <div className="pb-5 pl-16 text-[16px] text-gray-600 dark:text-gray-400 leading-relaxed space-y-3">
+          <div className="pb-5 pl-16 text-[17px] text-gray-600 dark:text-gray-400 leading-relaxed space-y-3">
             {project.description && <p>{project.description}</p>}
             {project.tags && (
               <div className="flex flex-wrap gap-2 pt-1">
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-2 py-0.5 rounded-md bg-gray-100 dark:bg-gray-800 text-xs font-medium text-gray-500 dark:text-gray-400"
+                    className="px-2 py-0.5 rounded-md bg-gray-100 dark:bg-gray-800 text-sm font-medium text-gray-500 dark:text-gray-400"
                   >
                     {tag}
                   </span>
@@ -194,24 +212,39 @@ function WorkRow({ entry, open, onToggle }: {
   open: boolean;
   onToggle: () => void;
 }) {
+  const [imgError, setImgError] = useState(false);
+
   return (
     <div className="border-b border-gray-100 dark:border-gray-800">
       <div className="flex items-center gap-4 py-4">
         {/* Icon */}
         <div
-          className={`h-12 w-12 flex-shrink-0 rounded-lg ${entry.iconBg} flex items-center justify-center text-[10px] font-bold text-gray-600 dark:text-gray-300`}
+          className={`h-12 w-12 flex-shrink-0 rounded-lg ${entry.iconBg} flex items-center justify-center overflow-hidden`}
         >
-          {entry.iconLabel}
+          {entry.iconSrc && !imgError ? (
+            <Image
+              src={entry.iconSrc}
+              alt={entry.company}
+              width={40}
+              height={40}
+              className="object-contain"
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <span className="text-[10px] font-bold text-gray-600 dark:text-gray-300">
+              {entry.iconLabel}
+            </span>
+          )}
         </div>
 
         {/* Trigger */}
         <button onClick={onToggle} className="flex flex-col w-full text-left">
           <div className="flex items-baseline justify-between w-full gap-4">
-            <span className="text-gray-900 dark:text-gray-100 font-semibold text-[18px]">
+            <span className="text-gray-900 dark:text-gray-100 font-semibold text-[19px]">
               {entry.role}
             </span>
             <div className="flex items-center gap-3 flex-shrink-0">
-              <span className="text-gray-400 dark:text-gray-500 text-[13px] hidden sm:block">
+              <span className="text-gray-400 dark:text-gray-500 text-[14px] hidden sm:block">
                 {entry.start} – {entry.end}
               </span>
               <ChevronDown
@@ -220,10 +253,10 @@ function WorkRow({ entry, open, onToggle }: {
               />
             </div>
           </div>
-          <span className="text-gray-500 dark:text-gray-400 text-[16px] mt-0.5">
+          <span className="text-gray-500 dark:text-gray-400 text-[17px] mt-0.5">
             {entry.company}
           </span>
-          <span className="text-gray-400 dark:text-gray-500 text-xs mt-0.5 sm:hidden">
+          <span className="text-gray-400 dark:text-gray-500 text-sm mt-0.5 sm:hidden">
             {entry.start} – {entry.end}
           </span>
         </button>
@@ -234,7 +267,7 @@ function WorkRow({ entry, open, onToggle }: {
         className={`grid transition-all duration-300 ease-in-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
       >
         <div className="overflow-hidden">
-          <div className="pb-5 pl-16 text-[16px] text-gray-600 dark:text-gray-400 leading-relaxed space-y-3">
+          <div className="pb-5 pl-16 text-[17px] text-gray-600 dark:text-gray-400 leading-relaxed space-y-3">
             {entry.bullets && (
               <ul className="list-disc pl-4 space-y-1">
                 {entry.bullets.map((b, i) => (
@@ -247,7 +280,7 @@ function WorkRow({ entry, open, onToggle }: {
                 {entry.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-2 py-0.5 rounded-md bg-gray-100 dark:bg-gray-800 text-xs font-medium text-gray-500 dark:text-gray-400"
+                    className="px-2 py-0.5 rounded-md bg-gray-100 dark:bg-gray-800 text-sm font-medium text-gray-500 dark:text-gray-400"
                   >
                     {tag}
                   </span>
@@ -267,6 +300,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<Tab>("about");
   const [isDark, setIsDark] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   // Read theme from DOM after hydration (inline script already set html.dark)
   useEffect(() => {
@@ -285,6 +319,7 @@ export default function Home() {
       localStorage.setItem("theme", "light");
     }
   }, [isDark, mounted]);
+
   const [openProjects, setOpenProjects] = useState<Set<number>>(new Set());
   const [openWork, setOpenWork] = useState<Set<number>>(new Set());
 
@@ -302,174 +337,229 @@ export default function Home() {
       return next;
     });
 
+  const handleTabChange = (tab: Tab) => {
+    setActiveTab(tab);
+    setMenuOpen(false);
+  };
+
   return (
     <div className="min-h-screen bg-[#f2f0eb] dark:bg-[#1e1e1e] transition-colors duration-200 flex flex-col animate-fade-in-up">
-        {/* Nav */}
-        <nav className="max-w-5xl w-full mx-auto px-14 pt-12">
-          <div className="flex items-center justify-between pb-4">
+      {/* Nav */}
+      <nav className="max-w-5xl w-full mx-auto px-6 sm:px-14 pt-12">
+        <div className="flex items-center justify-between pb-4">
+
+          {/* Left: hamburger on mobile, theme toggle on desktop */}
+          <div className="flex items-center gap-3">
+            {/* Hamburger — mobile only */}
+            <button
+              onClick={() => setMenuOpen((prev) => !prev)}
+              aria-label="Toggle menu"
+              className="sm:hidden text-gray-400 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-200 transition-colors"
+            >
+              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+
+            {/* Theme toggle — desktop only */}
             <button
               onClick={() => setIsDark(!isDark)}
               aria-label="Toggle theme"
-              className="text-gray-400 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-200 transition-colors"
+              className="hidden sm:block text-gray-400 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-200 transition-colors"
             >
               {mounted ? (isDark ? <Sun size={18} /> : <Moon size={18} />) : <Moon size={18} />}
             </button>
-            <div className="flex gap-10">
-              {(["about", "work", "projects"] as Tab[]).map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`text-base capitalize tracking-wide transition-all duration-150 ${
-                    activeTab === tab
-                      ? "text-gray-900 dark:text-gray-100 font-semibold border-b-2 border-gray-900 dark:border-gray-100 pb-1"
-                      : "text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-400 pb-1"
-                  }`}
-                >
-                  {tab}
-                </button>
+          </div>
+
+          {/* Center: tabs — desktop only */}
+          <div className="hidden sm:flex gap-10">
+            {(["about", "work", "projects"] as Tab[]).map((tab) => (
+              <button
+                key={tab}
+                onClick={() => handleTabChange(tab)}
+                className={`text-lg capitalize tracking-wide transition-all duration-150 ${
+                  activeTab === tab
+                    ? "text-gray-900 dark:text-gray-100 font-semibold border-b-2 border-gray-900 dark:border-gray-100 pb-1"
+                    : "text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-400 pb-1"
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+
+          {/* Right: theme toggle on mobile, empty on desktop (theme is left) */}
+          <button
+            onClick={() => setIsDark(!isDark)}
+            aria-label="Toggle theme"
+            className="sm:hidden text-gray-400 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-200 transition-colors"
+          >
+            {mounted ? (isDark ? <Sun size={18} /> : <Moon size={18} />) : <Moon size={18} />}
+          </button>
+
+          {/* Spacer on desktop to keep tabs centered */}
+          <div className="hidden sm:block w-[18px]" />
+        </div>
+
+        <hr className="border-gray-200 dark:border-gray-800" />
+
+        {/* Mobile dropdown menu */}
+        {menuOpen && (
+          <div className="sm:hidden border-b border-gray-200 dark:border-gray-800 py-2">
+            {(["about", "work", "projects"] as Tab[]).map((tab) => (
+              <button
+                key={tab}
+                onClick={() => handleTabChange(tab)}
+                className={`block w-full text-left px-2 py-3 text-lg capitalize tracking-wide transition-colors ${
+                  activeTab === tab
+                    ? "text-gray-900 dark:text-gray-100 font-semibold"
+                    : "text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-400"
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+        )}
+      </nav>
+
+      {/* Content */}
+      <main className="max-w-5xl w-full mx-auto px-6 sm:px-14 pt-14 sm:pt-20 pb-10 flex-1">
+        {/* About */}
+        {activeTab === "about" && (
+          <div>
+            <h1 className="text-4xl sm:text-5xl font-normal text-gray-900 dark:text-gray-100 tracking-tight mb-10 sm:mb-14">
+              Hi, I&apos;m Arnav Shenoy
+            </h1>
+            <div className="flex flex-col sm:flex-row gap-10 sm:gap-20">
+              {/* Left col */}
+              <div className="flex flex-col items-center gap-6 sm:flex-shrink-0">
+                {/*
+                <img
+                  src="/images/profile.jpg"
+                  alt="Arnav Shenoy"
+                  className="w-44 sm:w-56 h-auto rounded-xl object-cover"
+                />
+                */}
+                <div className="flex items-center gap-5">
+                  <a
+                    href="https://github.com/shenoy4365"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                    className="text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
+                  >
+                    <FaGithub size={26} />
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/arnav-shenoy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    className="text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
+                  >
+                    <FaLinkedinIn size={26} />
+                  </a>
+                  <a
+                    href="mailto:arnav.shenoy@gmail.com"
+                    aria-label="Email"
+                    className="text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
+                  >
+                    <MdOutlineEmail size={28} />
+                  </a>
+                </div>
+              </div>
+
+              {/* Right col */}
+              <div className="flex-1 space-y-6 text-[18px] leading-[1.9] text-gray-600 dark:text-gray-400">
+                <p>
+                  Hi! I&apos;m a student at{" "}
+                  <a
+                    href="https://fremd.d211.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
+                  >
+                    William Fremd High School
+                  </a>{" "}
+                  studying computer science and statistics. I&apos;m a
+                  computational biology research intern at{" "}
+                  <a
+                    href="https://www.cmu.edu/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
+                  >
+                    Carnegie Mellon University
+                  </a>
+                  , where I work on machine learning for healthcare.
+                </p>
+                <p>
+                  Previously, I&apos;ve conducted research at{" "}
+                  <a
+                    href="https://www.brown.edu/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
+                  >
+                    Brown University
+                  </a>{" "}
+                  and{" "}
+                  <a
+                    href="https://www.ucla.edu/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
+                  >
+                    UCLA
+                  </a>
+                  .
+                </p>
+                <p>
+                  I&apos;m interested in machine learning,
+                  computational biology, and neuroscience.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Work */}
+        {activeTab === "work" && (
+          <div>
+            <h2 className="text-4xl sm:text-5xl font-normal text-gray-900 dark:text-gray-100 tracking-tight mb-10">
+              Work Experience
+            </h2>
+            <div>
+              {workEntries.map((entry, i) => (
+                <WorkRow
+                  key={i}
+                  entry={entry}
+                  open={openWork.has(i)}
+                  onToggle={() => toggleWork(i)}
+                />
               ))}
             </div>
           </div>
-          <hr className="border-gray-200 dark:border-gray-800" />
-        </nav>
+        )}
 
-        {/* Content */}
-        <main className="max-w-5xl w-full mx-auto px-14 pt-20 pb-10 flex-1">
-          {/* About */}
-          {activeTab === "about" && (
+        {/* Projects */}
+        {activeTab === "projects" && (
+          <div>
+            <h2 className="text-4xl sm:text-5xl font-normal text-gray-900 dark:text-gray-100 tracking-tight mb-10">
+              Coding Projects
+            </h2>
             <div>
-              <h1 className="text-4xl font-normal text-gray-900 dark:text-gray-100 tracking-tight mb-14">
-                Hi, I&apos;m Arnav Shenoy
-              </h1>
-              <div className="flex gap-20">
-                {/* Left col */}
-                <div className="flex-shrink-0 flex flex-col items-center gap-6">
-                  <img
-                    src="/images/profile.jpg"
-                    alt="Arnav Shenoy"
-                    className="w-56 h-72 rounded-xl object-cover"
-                  />
-                  <div className="flex items-center gap-5">
-                    <a
-                      href="https://github.com/shenoy4365"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="GitHub"
-                      className="text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
-                    >
-                      <FaGithub size={26} />
-                    </a>
-                    <a
-                      href="https://linkedin.com/in/arnav-shenoy"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="LinkedIn"
-                      className="text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
-                    >
-                      <FaLinkedinIn size={26} />
-                    </a>
-                    <a
-                      href="mailto:arnav.shenoy@gmail.com"
-                      aria-label="Email"
-                      className="text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
-                    >
-                      <MdOutlineEmail size={28} />
-                    </a>
-                  </div>
-                </div>
-
-                {/* Right col */}
-                <div className="flex-1 space-y-6 text-[17px] leading-[1.9] text-gray-600 dark:text-gray-400">
-                  <p>
-                    Hi! I&apos;m a student at{" "}
-                    <a
-                      href="https://fremd.d211.org/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
-                    >
-                      William Fremd High School
-                    </a>{" "}
-                    studying computer science and statistics. I&apos;m a
-                    computational biology research intern at{" "}
-                    <a
-                      href="https://www.cmu.edu/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
-                    >
-                      Carnegie Mellon University
-                    </a>
-                    , where I work on machine learning for healthcare.
-                  </p>
-                  <p>
-                    Previously, I&apos;ve conducted research at{" "}
-                    <a
-                      href="https://www.brown.edu/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
-                    >
-                      Brown University
-                    </a>{" "}
-                    and{" "}
-                    <a
-                      href="https://www.ucla.edu/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
-                    >
-                      UCLA
-                    </a>
-                    . 
-                  </p>
-                  <p>
-                    I&apos;m interested in machine learning,
-                    computational biology, and neuroscience.
-                  </p>
-                </div>
-              </div>
+              {projects.map((project, i) => (
+                <ProjectRow
+                  key={i}
+                  project={project}
+                  open={openProjects.has(i)}
+                  onToggle={() => toggleProject(i)}
+                />
+              ))}
             </div>
-          )}
-
-          {/* Work */}
-          {activeTab === "work" && (
-            <div>
-              <h2 className="text-4xl font-normal text-gray-900 dark:text-gray-100 tracking-tight mb-10">
-                Work Experience
-              </h2>
-              <div>
-                {workEntries.map((entry, i) => (
-                  <WorkRow
-                    key={i}
-                    entry={entry}
-                    open={openWork.has(i)}
-                    onToggle={() => toggleWork(i)}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Projects */}
-          {activeTab === "projects" && (
-            <div>
-              <h2 className="text-4xl font-normal text-gray-900 dark:text-gray-100 tracking-tight mb-10">
-                Coding Projects
-              </h2>
-              <div>
-                {projects.map((project, i) => (
-                  <ProjectRow
-                    key={i}
-                    project={project}
-                    open={openProjects.has(i)}
-                    onToggle={() => toggleProject(i)}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
-        </main>
+          </div>
+        )}
+      </main>
     </div>
   );
 }
