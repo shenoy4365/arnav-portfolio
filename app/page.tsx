@@ -12,9 +12,11 @@ type Tab = "about" | "work" | "projects";
 type ProjectEntry = {
   name: string;
   caption: string;
+  date?: string;
   description?: string;
   tags?: string[];
   href?: string;
+  github?: string;
   icon: React.ReactNode;
 };
 
@@ -34,25 +36,44 @@ type WorkEntry = {
 
 const projects: ProjectEntry[] = [
   {
-    name: "Project Name",
-    caption: "One-line description of what this does.",
+    name: "Diagnosis Search",
+    caption: "Agentic AI Healthcare Search Engine",
+    date: "Apr 2026",
     description:
-      "Longer description of the project — what problem it solves, how you built it, and what impact it had.",
-    tags: ["Python", "Next.js", "PyTorch"],
+      "A Next.js medical search engine that queries trusted health websites, PubMed, and Semantic Scholar in parallel to stream Gemini-synthesized, fully-cited answers, handling 20 concurrent queries with sub-200ms response times across healthcare, scientific, and educational modes.",
+    tags: ["Python", "Next.js", "Google Gemini API", "Tavily Search", "Supabase"],
     href: "#",
+    github: "https://github.com/shenoy4365/diagnosis-search",
     icon: (
       <div className="w-full h-full rounded-lg bg-blue-100 dark:bg-blue-950 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold text-lg">
         P
       </div>
     ),
   },
+  // {
+  //   name: "DermaLoom",
+  //   caption: "Skin Lesion Disease AI Doctor and Visualization Platform",
+  //   date: "Apr 2026",
+  //   description:
+  //     "Longer description of the project — what problem it solves, how you built it, and what impact it had.",
+  //   tags: ["PyTorch", "scikit-learn", "R"],
+  //   href: "#",
+  //   github: "#",
+  //   icon: (
+  //     <div className="w-full h-full rounded-lg bg-violet-100 dark:bg-violet-950 flex items-center justify-center text-violet-600 dark:text-violet-400 font-bold text-lg">
+  //       P
+  //     </div>
+  //   ),
+  // },
   {
-    name: "Project Name",
-    caption: "One-line description of what this does.",
+    name: "Glaucoma Differential Equations Paper",
+    caption: "Computational Analysis of Glaucoma using Partial Differential Equations",
+    date: "Mar 2026",
     description:
-      "Longer description of the project — what problem it solves, how you built it, and what impact it had.",
-    tags: ["React", "Python", "Supabase"],
+      "A computational glaucoma biomechanics framework that models intraocular pressure (IOP)–induced stress in the optic nerve head using PDE-based fluid and elasticity simulations, systematically comparing Finite Element and Finite Difference methods while integrating clinical imaging datasets (PAPILA, GRAPE, HYGD) to bridge machine learning data with physics-based ophthalmic modeling.",
+    tags: ["Python", "Differential Equations", "Machine Learning", "Computational Biology"],
     href: "#",
+    github: "https://github.com/shenoy4365/glaucoma-pde-paper",
     icon: (
       <div className="w-full h-full rounded-lg bg-emerald-100 dark:bg-emerald-950 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-bold text-lg">
         P
@@ -60,18 +81,35 @@ const projects: ProjectEntry[] = [
     ),
   },
   {
-    name: "Project Name",
-    caption: "One-line description of what this does.",
+    name: "DermaLoom",
+    caption: "Skin Lesion Disease AI Doctor and Visualization Platform",
+    date: "Mar 2026",
     description:
-      "Longer description of the project — what problem it solves, how you built it, and what impact it had.",
-    tags: ["PyTorch", "scikit-learn", "R"],
+      "An AI dermatology assistant that classifies skin lesions using an EfficientNet-B3 model trained on the HAM10000 dataset and generates evidence-based educational reports with interactive disease timelines, supporting 7-class lesion classification across 10,015 dermatoscopic images and delivering real-time ONNX inference through a FastAPI + Next.js platform.",
+    tags: ["Typescript", "Python", "Neuroscience", "Machine Learning"],
     href: "#",
+    github: "https://github.com/shenoy4365/derma-loom",
     icon: (
       <div className="w-full h-full rounded-lg bg-violet-100 dark:bg-violet-950 flex items-center justify-center text-violet-600 dark:text-violet-400 font-bold text-lg">
         P
       </div>
     ),
   },
+  {
+    name: "NeurAmigo",
+    caption: "Educational iOS Swift App about Neuroscience Diseases",
+    date: "Feb 2026",
+    description:
+      "An interactive SwiftUI neuroscience learning app that delivers structured modules and a searchable disease encyclopedia for neurological disorders, featuring secure on-device Keychain authentication and progress tracking across 15+ neurological disease modules with 100% offline functionality and zero backend dependencies.",
+    tags: ["SwiftUI", "iOS Development", "Neuroscience", "Education", "On-device Authentication"],
+    href: "#",
+    github: "https://github.com/shenoy4365/neuramigo",
+    icon: (
+      <div className="w-full h-full rounded-lg bg-violet-100 dark:bg-violet-950 flex items-center justify-center text-violet-600 dark:text-violet-400 font-bold text-lg">
+        P
+      </div>
+    ),
+  }
 ];
 
 const workEntries: WorkEntry[] = [
@@ -149,30 +187,29 @@ function ProjectRow({ project, open, onToggle }: {
           className="flex flex-col w-full text-left"
         >
           <div className="flex items-baseline justify-between w-full gap-4">
-            <span className="text-gray-900 dark:text-gray-100 font-semibold text-[19px] hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-              {project.href && project.href !== "#" ? (
-                <a
-                  href={project.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-1"
-                >
-                  {project.name}
-                  <ExternalLink size={12} className="opacity-50" />
-                </a>
-              ) : (
-                project.name
-              )}
+            <span className="text-gray-900 dark:text-gray-100 font-semibold text-[19px]">
+              {project.name}
             </span>
-            <ChevronDown
-              size={16}
-              className={`text-gray-400 flex-shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
-            />
+            <div className="flex items-center gap-3 flex-shrink-0">
+              {project.date && (
+                <span className="text-gray-400 dark:text-gray-500 text-[14px] hidden sm:block">
+                  {project.date}
+                </span>
+              )}
+              <ChevronDown
+                size={16}
+                className={`text-gray-400 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+              />
+            </div>
           </div>
           <span className="text-gray-500 dark:text-gray-400 text-[17px] mt-0.5">
             {project.caption}
           </span>
+          {project.date && (
+            <span className="text-gray-400 dark:text-gray-500 text-sm mt-0.5 sm:hidden">
+              {project.date}
+            </span>
+          )}
         </button>
       </div>
 
@@ -195,6 +232,17 @@ function ProjectRow({ project, open, onToggle }: {
                 ))}
               </div>
             )}
+            {project.github && project.github !== "#" && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-sm text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+              >
+                <FaGithub size={13} />
+                Source
+              </a>
+            )}
           </div>
         </div>
       </div>
@@ -216,7 +264,7 @@ function WorkRow({ entry, open, onToggle }: {
       <div className="flex items-center gap-4 py-4">
         {/* Icon */}
         <div
-          className={`h-12 w-12 flex-shrink-0 rounded-lg ${entry.iconBg} flex items-center justify-center overflow-hidden`}
+          className="h-12 w-12 flex-shrink-0 rounded-lg flex items-center justify-center overflow-hidden"
         >
           {entry.iconSrc && !imgError ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -419,7 +467,7 @@ export default function Home() {
         {/* About */}
         {activeTab === "about" && (
           <div>
-            <h1 className="text-4xl sm:text-5xl font-normal text-gray-900 dark:text-gray-100 tracking-tight mb-5 sm:mb-7">
+            <h1 className="text-[34px] sm:text-[46px] font-normal text-gray-900 dark:text-gray-100 tracking-tight mb-5 sm:mb-7">
               Hi, I&apos;m Arnav Shenoy
             </h1>
             {/*
@@ -514,7 +562,7 @@ export default function Home() {
         {/* Work */}
         {activeTab === "work" && (
           <div>
-            <h2 className="text-4xl sm:text-5xl font-normal text-gray-900 dark:text-gray-100 tracking-tight mb-5">
+            <h2 className="text-[34px] sm:text-[46px] font-normal text-gray-900 dark:text-gray-100 tracking-tight mb-5">
               Work Experience
             </h2>
             <div>
@@ -533,7 +581,7 @@ export default function Home() {
         {/* Projects */}
         {activeTab === "projects" && (
           <div>
-            <h2 className="text-4xl sm:text-5xl font-normal text-gray-900 dark:text-gray-100 tracking-tight mb-5">
+            <h2 className="text-[34px] sm:text-[46px] font-normal text-gray-900 dark:text-gray-100 tracking-tight mb-5">
               Coding Projects
             </h2>
             <div>
