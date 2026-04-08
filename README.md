@@ -1,5 +1,7 @@
 # Arnav Shenoy's Portfolio Website
 
+Visit the live website link at [arnavshenoy.vercel.app](arnavshenoy.vercel.app)
+
 ## 🛠️ Tech Stack
 
 - **Next.js 15** + **TypeScript** — App Router, server components, SSR-safe theme init
