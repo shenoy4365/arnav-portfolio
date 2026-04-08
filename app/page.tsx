@@ -179,7 +179,7 @@ function ProjectRow({ project, open, onToggle }: {
     <div className="border-b border-gray-100 dark:border-gray-800">
       <div className="flex items-center gap-4 py-4">
         {/* Icon */}
-        <div className="relative h-12 w-12 flex-shrink-0">{project.icon}</div>
+        {/* <div className="relative h-12 w-12 flex-shrink-0">{project.icon}</div> */}
 
         {/* Trigger */}
         <button
@@ -218,11 +218,11 @@ function ProjectRow({ project, open, onToggle }: {
         className={`grid transition-all duration-300 ease-in-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
       >
         <div className="overflow-hidden">
-          <div className="pb-5 pl-16 text-[17px] text-gray-600 dark:text-gray-400 leading-relaxed space-y-3">
+          <div className="pb-5 text-[17px] text-gray-600 dark:text-gray-400 leading-relaxed space-y-3">
             {project.description && <p>{project.description}</p>}
-            {project.tags && (
-              <div className="flex flex-wrap gap-2 pt-1">
-                {project.tags.map((tag) => (
+            {(project.tags || project.github) && (
+              <div className="flex flex-wrap items-center gap-2 pt-1">
+                {project.tags?.map((tag) => (
                   <span
                     key={tag}
                     className="px-2 py-0.5 rounded-md bg-gray-100 dark:bg-gray-800 text-sm font-medium text-gray-500 dark:text-gray-400"
@@ -230,18 +230,18 @@ function ProjectRow({ project, open, onToggle }: {
                     {tag}
                   </span>
                 ))}
+                {project.github && project.github !== "#" && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ml-auto mr-[28px] inline-flex items-center gap-1 text-sm text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+                  >
+                    <FaGithub size={13} />
+                    Source
+                  </a>
+                )}
               </div>
-            )}
-            {project.github && project.github !== "#" && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-sm text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
-              >
-                <FaGithub size={13} />
-                Source
-              </a>
             )}
           </div>
         </div>
