@@ -344,7 +344,7 @@ function WorkRow({ entry, open, onToggle }: {
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<Tab>("about");
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
   const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
