@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
-import { Sun, Moon, ChevronDown, ExternalLink, Menu, X } from "lucide-react";
+import { Sun, Moon, ChevronDown, Menu, X } from "lucide-react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -389,7 +389,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f2f0eb] dark:bg-[#1e1e1e] transition-colors duration-200 flex flex-col animate-fade-in-up">
+    <div className="min-h-screen bg-[#f2f0eb] dark:bg-[#1e1e1e] transition-colors duration-200 flex flex-col">
       {/* Nav */}
       <nav className="max-w-5xl w-full mx-auto px-6 sm:px-14 pt-12">
         <div className="flex items-center justify-between pb-4">
@@ -464,6 +464,7 @@ export default function Home() {
 
       {/* Content */}
       <main className="max-w-5xl w-full mx-auto px-6 sm:px-14 pt-14 sm:pt-20 pb-10 flex-1">
+        <div key={activeTab} className="animate-fade-in-up">
         {/* About */}
         {activeTab === "about" && (
           <div>
@@ -480,51 +481,43 @@ export default function Home() {
 
             <div className="space-y-6 text-[18px] leading-[1.9] text-gray-600 dark:text-gray-400">
               <p>
-                Hi! I&apos;m a student at{" "}
-                <a
-                  href="https://fremd.d211.org/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
-                >
+                I&apos;m a high school senior at {" "}
                   William Fremd High School
-                </a>{" "}
-                studying computer science and statistics. I&apos;m a
-                computational biology research intern at{" "}
+                and am incoming CS + Stats major @ UIUC. Currently, I&apos;m a
+                Computational Biology Researcher at{" "}
                 <a
-                  href="https://www.cmu.edu/"
+                  href="https://www.cmu.edu/cbd/" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
                 >
                   Carnegie Mellon University
                 </a>
-                , where I work on machine learning for healthcare.
+                 , where I'm engineering spatial point-process augmentation models for colon tissue analysis.
               </p>
               <p>
-                Previously, I&apos;ve conducted research at{" "}
+                I also conduct computational neuroscience research at{" "}
                 <a
-                  href="https://www.brown.edu/"
+                  href="https://www.southcoast.org/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
                 >
-                  Brown University
+                  Southcoast Health
                 </a>{" "}
                 and{" "}
                 <a
-                  href="https://www.ucla.edu/"
+                  href="https://www.uclahealth.org/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-900 dark:text-gray-200 underline underline-offset-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-gray-600 dark:hover:decoration-gray-400 transition-colors"
                 >
                   UCLA
                 </a>
-                .
+                , primarily using machine learning and differential equation modeling for glioblastoma and genetic research.
               </p>
               <p>
-                I&apos;m interested in machine learning,
-                computational biology, and neuroscience.
+                <b>Notable Awards:</b> Congressional App Challenge Winner, NHS Scholarship National Semifinalist, 2x AIME Qualifier
               </p>
 
               {/* Social icons */}
@@ -596,6 +589,7 @@ export default function Home() {
             </div>
           </div>
         )}
+        </div>
       </main>
     </div>
   );

@@ -1,25 +1,99 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const baseUrl = "https://arnavshenoy.com";
+
 export const metadata: Metadata = {
-  title: "Arnav Shenoy",
-  description: "High school student researcher interested in machine learning, computational biology, and neuroscience. Research intern at Carnegie Mellon University.",
-  keywords: ["portfolio", "machine learning", "computational biology", "research", "AI", "neuroscience"],
-  authors: [{ name: "Arnav Shenoy" }],
+  metadataBase: new URL(baseUrl),
+  title: {
+    default: "Arnav Shenoy",
+    template: "%s | Arnav Shenoy",
+  },
+  description:
+    "Arnav Shenoy is a high school researcher at William Fremd High School specializing in machine learning, computational biology, and neuroscience. Computational biology research intern at Carnegie Mellon University, with research at UCLA School of Medicine and Southcoast Health (Brown-affiliated).",
+  keywords: [
+    "Arnav Shenoy",
+    "arnavshenoy",
+    "Arnav Shenoy portfolio",
+    "Arnav Shenoy CMU",
+    "Arnav Shenoy UCLA",
+    "Arnav Shenoy researcher",
+    "machine learning researcher",
+    "computational biology",
+    "neuroscience researcher",
+    "high school researcher",
+    "Carnegie Mellon University research intern",
+    "UCLA School of Medicine",
+    "Southcoast Health",
+    "William Fremd High School",
+    "glioblastoma research",
+    "computational neuroscience",
+    "deep learning",
+    "bioinformatics",
+    "AI research",
+  ],
+  authors: [{ name: "Arnav Shenoy", url: baseUrl }],
   creator: "Arnav Shenoy",
+  publisher: "Arnav Shenoy",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  alternates: {
+    canonical: baseUrl,
+  },
   openGraph: {
-    type: "website",
+    type: "profile",
     locale: "en_US",
-    url: "https://arnavshenoy.com",
-    title: "Arnav Shenoy",
-    description: "High school student researcher interested in machine learning, computational biology, and neuroscience.",
+    url: baseUrl,
+    title: "Arnav Shenoy — ML & Computational Biology Researcher",
+    description:
+      "High school researcher at CMU, UCLA, and Southcoast Health working on machine learning, computational biology, and neuroscience.",
     siteName: "Arnav Shenoy",
+    firstName: "Arnav",
+    lastName: "Shenoy",
   },
   twitter: {
     card: "summary",
-    title: "Arnav Shenoy",
-    description: "High school student researcher interested in machine learning, computational biology, and neuroscience.",
+    title: "Arnav Shenoy — ML & Computational Biology Researcher",
+    description:
+      "High school researcher at CMU, UCLA, and Southcoast Health working on machine learning, computational biology, and neuroscience.",
+    creator: "@arnavshenoy",
   },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Arnav Shenoy",
+  url: baseUrl,
+  sameAs: [
+    "https://github.com/shenoy4365",
+    "https://linkedin.com/in/arnav-shenoy",
+  ],
+  jobTitle: "Computational Biology Research Intern",
+  worksFor: {
+    "@type": "Organization",
+    name: "Carnegie Mellon University",
+  },
+  alumniOf: {
+    "@type": "EducationalOrganization",
+    name: "William Fremd High School",
+  },
+  knowsAbout: [
+    "Machine Learning",
+    "Computational Biology",
+    "Neuroscience",
+    "Deep Learning",
+    "Bioinformatics",
+    "Computer Vision",
+  ],
+  description:
+    "High school student researcher specializing in machine learning, computational biology, and neuroscience.",
 };
 
 export default function RootLayout({
@@ -34,6 +108,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}})();`,
           }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body>{children}</body>
