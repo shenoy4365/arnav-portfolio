@@ -1,6 +1,6 @@
 # Arnav Shenoy's Portfolio Website
 
-Visit the live website link at [arnavshenoy.vercel.app](arnavshenoy.vercel.app)
+Visit the live website link at [arnavshenoy.vercel.app](https://arnavshenoy.vercel.app)
 
 ## 🛠️ Tech Stack
 
