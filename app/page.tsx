@@ -493,7 +493,7 @@ export default function Home() {
                 >
                   Carnegie Mellon University
                 </a>
-                 , where I'm engineering spatial point-process augmentation models for colon tissue analysis.
+                 , where I&apos;m engineering spatial point-process augmentation models for colon tissue analysis.
               </p>
               <p>
                 I also conduct computational neuroscience research at{" "}
